@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananto Mohammad | Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'media',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes bounce-x {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+        .animate-bounce-x { animation: bounce-x 1s infinite; }
+        html { scroll-behavior: smooth; }
+        
+        /* Ensures the photo stays at exactly your requested size */
+        .profile-img-size {
+            width: 404px;
+            height: 508px;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 font-sans selection:bg-blue-500/30 transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-6">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-1 group cursor-pointer font-bold text-xl tracking-tight" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <span class="text-neutral-900 dark:text-white">I</span>
+                <div class="px-2 py-1 bg-gradient-to-tr from-blue-600 to-cyan-400 rounded text-white mx-1 shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                    AM
+                </div>
+                <span class="text-neutral-900 dark:text-white">Ananto Mohammad</span>
+            </div>
+
+            <div class="hidden md:flex space-x-8 text-xs font-bold uppercase tracking-widest">
+                <a href="#about" class="hover:text-blue-500 transition-colors">About</a>
+                <a href="#experience" class="hover:text-blue-500 transition-colors">Experience</a>
+                <a href="#skills" class="hover:text-blue-500 transition-colors">Skills</a>
+                <a href="#contact" class="hover:text-blue-500 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex flex-col justify-center pt-24 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(37,99,235,0.08),transparent_50%)] dark:bg-[radial-gradient(circle_at_30%_50%,rgba(37,99,235,0.15),transparent_50%)]"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative w-full">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <!-- Text Content -->
+                <div class="space-y-8">
+                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-medium">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                        <span>Available for Freelance & Full-time</span>
+                    </div>
+                    <h1 class="text-5xl md:text-8xl font-black leading-tight tracking-tighter">
+                        Creative <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-300">Designer</span> & Editor.
+                    </h1>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-lg md:text-xl max-w-xl leading-relaxed">
+                        Transforming complex ideas into stunning visual stories through motion graphics, video editing, and strategic design.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#experience" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all hover:scale-105 flex items-center gap-2 shadow-xl shadow-blue-500/25">
+                            View Experience <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#contact" class="px-8 py-4 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-900 dark:text-white rounded-2xl font-bold transition-all">
+                            Let's Talk
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Photo with Red Glow (Aligned Right, Pulled up 20px) -->
+                <div class="relative flex justify-center md:justify-end items-center">
+                    <div class="absolute w-[350px] aspect-square bg-red-600/20 dark:bg-red-600/40 blur-[100px] rounded-full -translate-y-5"></div>
+                    
+                    <!-- Light Mode Image -->
+                    <img src="https://i.ibb.co/hRPknqtt/ananto-website.png" alt="Ananto Mohammad" class="relative z-10 profile-img-size object-contain -translate-y-5 dark:hidden">
+                    
+                    <!-- Dark Mode Image -->
+                    <img src="https://i.ibb.co/Ldj62xVx/ananto-website-black.png" alt="Ananto Mohammad" class="relative z-10 profile-img-size object-contain -translate-y-5 hidden dark:block">
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Showcase Scroll -->
+        <div class="relative mt-8">
+            <div class="max-w-7xl mx-auto px-6 overflow-hidden">
+                <div class="flex overflow-x-auto pb-12 space-x-6 no-scrollbar snap-x">
+                    <div class="flex-none w-[300px] md:w-[450px] aspect-video relative rounded-3xl overflow-hidden snap-center border border-neutral-200 dark:border-neutral-800 shadow-xl transition-transform duration-500 hover:scale-[1.02] bg-neutral-100 dark:bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+                            <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-1">Recent Project</p>
+                            <h3 class="text-white text-xl font-bold">Motion Branding</h3>
+                        </div>
+                    </div>
+                    <div class="flex-none w-[300px] md:w-[450px] aspect-video relative rounded-3xl overflow-hidden snap-center border border-neutral-200 dark:border-neutral-800 shadow-xl transition-transform duration-500 hover:scale-[1.02] bg-neutral-100 dark:bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+                            <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-1">Recent Project</p>
+                            <h3 class="text-white text-xl font-bold">Visual Effects</h3>
+                        </div>
+                    </div>
+                    <div class="flex-none w-[300px] md:w-[450px] aspect-video relative rounded-3xl overflow-hidden snap-center border border-neutral-200 dark:border-neutral-800 shadow-xl transition-transform duration-500 hover:scale-[1.02] bg-neutral-100 dark:bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=800" class="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-6 flex flex-col justify-end">
+                            <p class="text-blue-400 text-xs font-bold uppercase tracking-widest mb-1">Recent Project</p>
+                            <h3 class="text-white text-xl font-bold">Web Layouts</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-neutral-50 dark:bg-neutral-900/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-16 items-center">
+                <div class="md:col-span-1">
+                    <h2 class="text-3xl font-black mb-6 uppercase tracking-tight">Professional Summary</h2>
+                    <div class="w-20 h-2 bg-blue-600 rounded-full"></div>
+                </div>
+                <div class="md:col-span-2 text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed space-y-6">
+                    <p>Deadline-oriented Graphic Designer focused on overseeing all phases of projects. Successful at creating brand messages, strategies, and key graphic productions. Resourceful and hardworking with expertise in top-notch content creation and motion graphics.</p>
+                    <div class="grid grid-cols-2 gap-8 pt-8">
+                        <div class="p-6 rounded-3xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+                            <i data-lucide="map-pin" class="text-blue-500 mb-3"></i>
+                            <h4 class="font-bold mb-1">Location</h4>
+                            <p class="text-sm">New York, NY (Willing to relocate)</p>
+                        </div>
+                        <div class="p-6 rounded-3xl bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-sm">
+                            <i data-lucide="award" class="text-blue-500 mb-3"></i>
+                            <h4 class="font-bold mb-1">Education</h4>
+                            <p class="text-sm">Graphics Design & Multimedia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-4xl font-black mb-4 uppercase tracking-tighter">Work Experience</h2>
+                <p class="text-neutral-500 dark:text-neutral-400 font-medium uppercase tracking-widest text-sm">Professional Journey</p>
+            </div>
+
+            <div class="space-y-16">
+                <!-- AMAC -->
+                <div class="group relative grid md:grid-cols-4 gap-8">
+                    <div class="md:col-span-1">
+                        <p class="text-blue-600 dark:text-blue-400 font-bold text-sm tracking-widest uppercase">Feb 2022 - Present</p>
+                        <p class="text-neutral-500 text-xs mt-2 uppercase flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Bohemia, NY</p>
+                    </div>
+                    <div class="md:col-span-3 space-y-6">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-1 group-hover:text-blue-600 transition-colors">Senior Designer</h3>
+                            <p class="text-neutral-700 dark:text-neutral-300 font-bold text-lg">AMAC - Association of Mature American Citizens</p>
+                        </div>
+                        <ul class="space-y-4 max-w-3xl text-neutral-600 dark:text-neutral-400">
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 flex-shrink-0"></div>
+                                <span>Conceptualized and executed dynamic motion graphics for promotional videos, increasing engagement by 30%.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 flex-shrink-0"></div>
+                                <span>Collaborated with cross-functional teams to translate client briefs into visually compelling animations.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 flex-shrink-0"></div>
+                                <span>Design multiple HTML landing pages and daily news email layouts.</span>
+                            </li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-4 py-1.5 bg-neutral-100 dark:bg-neutral-800 rounded-xl text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">Motion Graphics</span>
+                            <span class="px-4 py-1.5 bg-neutral-100 dark:bg-neutral-800 rounded-xl text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">HTML</span>
+                            <span class="px-4 py-1.5 bg-neutral-100 dark:bg-neutral-800 rounded-xl text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-200 dark:border-neutral-700">Email Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HAVOC -->
+                <div class="group relative grid md:grid-cols-4 gap-8">
+                    <div class="md:col-span-1">
+                        <p class="text-blue-600 dark:text-blue-400 font-bold text-sm tracking-widest uppercase">July 2019</p>
+                        <p class="text-neutral-500 text-xs mt-2 uppercase flex items-center gap-1"><i data-lucide="map-pin" class="w-3 h-3"></i> Brooklyn, NY</p>
+                    </div>
+                    <div class="md:col-span-3 space-y-6">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-1 group-hover:text-blue-600 transition-colors">Graphic Designer</h3>
+                            <p class="text-neutral-700 dark:text-neutral-300 font-bold text-lg">HAVOC</p>
+                        </div>
+                        <ul class="space-y-4 max-w-3xl text-neutral-600 dark:text-neutral-400">
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 flex-shrink-0"></div>
+                                <span>Managed and coordinated graphic design projects from concept through completion.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <div class="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2.5 flex-shrink-0"></div>
+                                <span>Worked closely with clients to create vision and consistently met deadlines.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Grid -->
+    <section id="skills" class="py-24 bg-neutral-50 dark:bg-neutral-900/40">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black mb-4 uppercase tracking-tighter">Software & Tech</h2>
+                <p class="text-neutral-500 dark:text-neutral-400 font-medium uppercase tracking-widest text-sm">Industry Standard Tools</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Column 1 -->
+                <div class="p-8 rounded-[32px] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-xl transition-all">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-8"><i data-lucide="palette"></i></div>
+                    <h3 class="text-2xl font-bold mb-8 uppercase tracking-tight">Design & Tool</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">Adobe Photoshop</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[95%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">Adobe Illustrator</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[90%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">Canva</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[90%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div class="p-8 rounded-[32px] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-xl transition-all">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-8"><i data-lucide="video"></i></div>
+                    <h3 class="text-2xl font-bold mb-8 uppercase tracking-tight">Video & Motion</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">Adobe After Effects</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[90%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">Adobe Premiere Pro</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[95%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">DaVinci Resolve</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[85%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column 3 -->
+                <div class="p-8 rounded-[32px] bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-xl transition-all">
+                    <div class="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-8"><i data-lucide="layout"></i></div>
+                    <h3 class="text-2xl font-bold mb-8 uppercase tracking-tight">Web & Marketing</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">HTML Landing Pages</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[85%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between group/skill">
+                            <span class="text-neutral-600 dark:text-neutral-400 font-medium">Email Marketing</span>
+                            <div class="w-12 h-1 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden"><div class="w-[90%] h-full bg-blue-600 rounded-full"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="bg-neutral-900 dark:bg-blue-600 rounded-[40px] overflow-hidden border border-neutral-800 dark:border-blue-500 shadow-2xl relative">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 dark:bg-white/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2"></div>
+                
+                <div class="grid md:grid-cols-2">
+                    <div class="p-12 md:p-16 text-white border-b md:border-b-0 md:border-r border-neutral-800 dark:border-blue-400 relative z-10">
+                        <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight uppercase tracking-tighter">Get in touch</h2>
+                        <p class="text-white/80 text-lg mb-12 max-w-sm">Have a project in mind or just want to say hi? Feel free to reach out via the form or my social channels.</p>
+                        
+                        <div class="space-y-6">
+                            <a href="mailto:anantomohammad@gmail.com" class="flex items-center gap-4 hover:text-blue-400 transition-colors group">
+                                <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                                <span class="font-medium">anantomohammad@gmail.com</span>
+                            </a>
+                            <a href="tel:+19293214400" class="flex items-center gap-4 hover:text-blue-400 transition-colors group">
+                                <div class="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                                <span class="font-medium">+1 929 321 4400</span>
+                            </a>
+                        </div>
+
+                        <div class="mt-16 flex gap-4">
+                            <a href="https://www.linkedin.com/in/01ananto/" target="_blank" class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all"><i data-lucide="linkedin"></i></a>
+                            <a href="https://youtube.com/01ananto" target="_blank" class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center hover:bg-white/20 hover:scale-110 transition-all"><i data-lucide="youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="p-12 md:p-16 relative z-10">
+                        <form action="https://formspree.io/f/anantomohammad@gmail.com" method="POST" class="space-y-6">
+                            <div>
+                                <label class="block text-white/60 text-xs font-bold uppercase tracking-widest mb-2" for="name">Your Name</label>
+                                <input type="text" name="name" id="name" required class="w-full bg-white/5 dark:bg-blue-700/30 border border-white/10 dark:border-white/20 rounded-2xl px-6 py-4 text-white placeholder-white/30 focus:outline-none focus:border-blue-400 transition-colors" placeholder="Ananto Mohammad">
+                            </div>
+                            <div>
+                                <label class="block text-white/60 text-xs font-bold uppercase tracking-widest mb-2" for="email">Email Address</label>
+                                <input type="email" name="_replyto" id="email" required class="w-full bg-white/5 dark:bg-blue-700/30 border border-white/10 dark:border-white/20 rounded-2xl px-6 py-4 text-white placeholder-white/30 focus:outline-none focus:border-blue-400 transition-colors" placeholder="hello@example.com">
+                            </div>
+                            <div>
+                                <label class="block text-white/60 text-xs font-bold uppercase tracking-widest mb-2" for="message">Your Message</label>
+                                <textarea name="message" id="message" rows="4" required class="w-full bg-white/5 dark:bg-blue-700/30 border border-white/10 dark:border-white/20 rounded-2xl px-6 py-4 text-white placeholder-white/30 focus:outline-none focus:border-blue-400 transition-colors resize-none" placeholder="Let's build something amazing..."></textarea>
+                            </div>
+                            <input type="hidden" name="_subject" value="New Portfolio Inquiry!">
+                            <button type="submit" class="w-full py-5 bg-white text-neutral-900 dark:text-blue-600 rounded-2xl font-black uppercase tracking-widest hover:scale-[1.01] transition-all shadow-xl">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-neutral-200 dark:border-neutral-900">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8 text-center">
+            <div class="flex items-center space-x-1 font-bold text-lg">
+                <span class="text-neutral-900 dark:text-white">I</span>
+                <div class="px-1.5 py-0.5 bg-blue-600 rounded text-xs text-white mx-1">AM</div>
+                <span class="text-neutral-500">Ananto Mohammad</span>
+            </div>
+            
+            <p class="text-neutral-400 text-xs font-medium uppercase tracking-widest">
+                © 2024 Designer Portfolio. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-white/90', 'dark:bg-neutral-950/90', 'backdrop-blur-md', 'border-b', 'border-neutral-200', 'dark:border-neutral-800', 'py-3');
+                nav.classList.remove('py-6');
+            } else {
+                nav.classList.remove('bg-white/90', 'dark:bg-neutral-950/90', 'backdrop-blur-md', 'border-b', 'border-neutral-200', 'dark:border-neutral-800', 'py-3');
+                nav.classList.add('py-6');
+            }
+        });
+    </script>
+</body>
+</html>
