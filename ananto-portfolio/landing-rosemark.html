@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefit Landing Page - AMAC</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'amac-red': '#A00000',
+                        'amac-cta': '#CC0000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* JOIN SECTION STYLES (User Provided) */
+        :root {
+            --bg: #f6f8fc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --stroke: rgba(2, 6, 23, .10);
+            --shadow: 0 18px 55px rgba(2, 6, 23, .10);
+            --red: #e11d48;
+            --purple: #7c3aed;
+            --blue: #2563eb;
+            --gold: #b45309;
+            --radius: 22px;
+        }
+
+        /* Standardized Container for all sections */
+        .content-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Button Glow Effect */
+        .btn-glow {
+            box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.5);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 15px 30px -5px rgba(225, 29, 72, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* Join Section Isolate Styles */
+        .amac-pricing { font-family: ui-sans-serif, system-ui, sans-serif; color: var(--text); }
+        .amac-pricing * { box-sizing: border-box; }
+        .amac-wrap { max-width: 1200px; margin: 0 auto; padding: 28px 24px 40px; }
+        .amac-hero {
+            background: radial-gradient(1000px 300px at 15% 0%, rgba(37,99,235,.18), transparent 55%),
+                        radial-gradient(900px 300px at 85% 0%, rgba(124,58,237,.16), transparent 55%),
+                        linear-gradient(180deg, #ffffff, var(--bg));
+            border: 1px solid var(--stroke);
+            border-radius: calc(var(--radius) + 6px);
+            padding: 26px 22px;
+            box-shadow: 0 8px 28px rgba(2, 6, 23, .06);
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+        .amac-hero h2 { margin: 0 0 8px; font-size: clamp(24px, 3.2vw, 40px); letter-spacing: -0.02em; line-height: 1.1; font-weight: 800; }
+        .amac-hero p { margin: 0 auto; color: var(--muted); font-size: 15px; line-height: 1.5; max-width: 70ch; }
+        .amac-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; justify-content: center; }
+        .amac-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(15, 23, 42, .05); border: 1px solid rgba(15, 23, 42, .08); color: rgba(15, 23, 42, .86); font-size: 13px; }
+        .amac-dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 4px rgba(22,163,74,.12); animation: amac-breathe 2.2s ease-in-out infinite; }
+        @keyframes amac-breathe { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(22,163,74,.12); } 50% { transform: scale(1.25); box-shadow: 0 0 0 8px rgba(22,163,74,.18); } }
+        .amac-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+        .amac-card { grid-column: span 12; background: var(--card); border: 1px solid var(--stroke); border-radius: var(--radius); padding: 18px 18px 16px; box-shadow: 0 10px 30px rgba(2, 6, 23, .06); position: relative; overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; display: flex; flex-direction: column; }
+        .amac-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .amac-top { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 14px; text-align: center; }
+        .amac-plan { font-weight: 800; letter-spacing: .02em; font-size: 13px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .amac-pill { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--stroke); background: rgba(2, 6, 23, .03); color: rgba(2, 6, 23, .75); display: inline-flex; justify-content: center; align-items: center; margin: 0 auto; }
+        .amac-price { display: flex; align-items: flex-end; gap: 6px; margin: 8px 0 4px; }
+        .amac-price .amt { font-size: 44px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+        .amac-price .cents { font-size: 18px; font-weight: 800; padding-bottom: 6px; opacity: .9; }
+        .amac-price .per { font-size: 12px; color: var(--muted); padding-bottom: 10px; white-space: nowrap; }
+        .amac-sub { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+        .amac-features { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; flex-grow: 1; }
+        .amac-features li { display: flex; gap: 10px; align-items: flex-start; color: rgba(15, 23, 42, .86); font-size: 14px; text-align: left; }
+        .amac-check { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; background: rgba(22,163,74,.14); color: #166534; flex: 0 0 18px; margin-top: 1px; }
+        .amac-actions { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .amac-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 800; letter-spacing: .01em; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--stroke); background: rgba(2, 6, 23, .02); color: rgba(2, 6, 23, .88); min-width: 140px; }
+        .amac-btn.primary { border: none; color: white; }
+        
+        /* Themes */
+        .theme-red .amac-plan { color: var(--red); } 
+        .theme-red .amac-btn.primary { background: linear-gradient(135deg, #fb7185, var(--red)); box-shadow: 0 8px 20px -4px rgba(225, 29, 72, 0.4); }
+        .theme-purple .amac-plan { color: var(--purple); } 
+        .theme-purple .amac-btn.primary { background: linear-gradient(135deg, #a78bfa, var(--purple)); box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.4); }
+        .theme-blue .amac-plan { color: var(--blue); } 
+        .theme-blue .amac-btn.primary { background: linear-gradient(135deg, #60a5fa, var(--blue)); box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4); }
+        .theme-gold .amac-plan { color: var(--gold); } 
+        .theme-gold .amac-btn.primary { background: linear-gradient(135deg, #fbbf24, var(--gold)); box-shadow: 0 8px 20px -4px rgba(180, 83, 9, 0.4); }
+
+        @media (min-width: 680px) { .amac-card { grid-column: span 6; } }
+        @media (min-width: 1020px) { .amac-card { grid-column: span 3; } }
+
+        /* Testimonial Slider Styles */
+        .slider-viewport {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 120s linear infinite; /* Slowed down further from 80s to 120s */
+        }
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .testimonial-card {
+            width: 320px;
+            flex-shrink: 0;
+            margin: 0 12px;
+        }
+        
+        /* Arrow Navigation - Pins to outer relative wrapper */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e5e7eb;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .nav-btn:hover { background: white; scale: 1.1; box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+        .nav-left { left: -24px; }
+        .nav-right { right: -24px; }
+
+        @media (max-width: 1280px) {
+            .nav-left { left: 10px; }
+            .nav-right { right: 10px; }
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-card { width: 280px; }
+            .nav-btn { display: none; }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-white text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- 1. HEADER -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <nav class="content-container flex items-center justify-between h-20">
+            <a href="https://amac.us">
+                <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" alt="AMAC Logo" class="h-10">
+            </a>
+            <div class="flex items-center space-x-6">
+                <a href="https://amac.us/login" class="hidden md:block text-gray-600 font-medium hover:text-amac-red">Login</a>
+                <a href="https://amac.us/secured/" class="bg-amac-red text-white font-bold py-2.5 px-6 rounded shadow-lg btn-glow hover:bg-red-700 transition">JOIN AMAC</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 2. HERO SECTION -->
+        <section class="bg-white">
+            <div class="content-container py-0 h-auto md:h-[250px] overflow-hidden flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 h-[200px] md:h-full relative overflow-hidden">
+                    <img src="https://dedicated.amac.us/dedicated/rosemark-landing-page-image.jpg" alt="Benefit Information" class="w-full h-full object-contain">
+                </div>
+                <div class="w-full md:w-1/2 h-auto md:h-full flex items-center bg-white p-6 sm:p-8">
+                    <div>
+                        <h1 class="text-2xl font-extrabold text-amac-red leading-tight mb-2 uppercase tracking-tight">
+                            Exclusive Provider of Financial Planning Services for AMAC Members
+                        </h1>
+                        <p class="text-base text-gray-700 mb-4">
+                            We stay focused on what's most important, you!
+                        </p>
+                        <a href="https://amac.us/rosemark-advisors/" class="inline-block bg-amac-cta text-white font-bold py-2.5 px-6 rounded-lg btn-glow hover:bg-red-700 transition text-sm">
+                            Click Here to Get Information
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="h-2 bg-amac-red border-0">
+
+        <!-- 3. BODY SECTION -->
+        <section class="py-10">
+            <div class="content-container">
+                <h2 class="text-2xl font-bold text-amac-red mb-6 border-l-4 border-amac-red pl-4">Getting to Know RoseMark</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-gray-700 text-base leading-relaxed">
+                    <p>
+                        <strong>RoseMark Advisors</strong> is the exclusive provider of financial services for AMAC members. For years, RoseMark has helped thousands of members build long-term strategies to create stronger financial futures. Our advisors will use their industry expertise to provide you a smart solution while safeguarding the things most important to you. RoseMark is a New York State registered investment advisory firm with a fiduciary duty to provide the best information, advice, services, and products to AMAC members.
+                    </p>
+                    <p>
+                        Our holistic approach to planning allows us to get a clear picture of your current financial situation and helps us set your path to the future. Our advisors offer a FREE cashflow analysis of assets and liabilities to prepare for your retirement. When you work with RoseMark, you receive the benefit of individualized service and timely education that founder John Wesley envisioned.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. CALL TO ACTION -->
+        <section class="bg-gray-50 py-12 text-center">
+            <div class="content-container">
+                <p class="text-xl text-amac-red font-semibold mb-2">We stay focused on what's most important, you!</p>
+                <p class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-10">Call 1-888-730-6565</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="https://amac.us/rosemark-advisors/" class="bg-amac-cta text-white font-bold py-4 px-8 rounded-xl btn-glow hover:bg-red-700 transition text-lg">
+                        Learn More About Rosemark
+                    </a>
+                    <a href="https://amac.us/secured/" class="bg-amac-cta text-white font-bold py-4 px-8 rounded-xl btn-glow hover:bg-red-700 transition text-lg">
+                        Download Free Guide
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. INFINITE TESTIMONIALS -->
+        <section class="bg-gray-100 py-16 overflow-hidden">
+            <div class="content-container mb-10 text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Member Experiences</h2>
+                <p class="text-gray-600">Hear from our community about how RoseMark has helped them.</p>
+            </div>
+
+            <div class="content-container relative">
+                <!-- Navigation Buttons (Fixed outside viewport) -->
+                <button class="nav-btn nav-left" onclick="scrollSlider('left')" aria-label="Previous">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button class="nav-btn nav-right" onclick="scrollSlider('right')" aria-label="Next">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
+                <!-- Viewport -->
+                <div class="slider-viewport group" id="sliderViewport">
+                    <!-- Track -->
+                    <div class="slider-track" id="testimonialTrack">
+                        <!-- Testimonials will be injected here by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. MEMBERSHIP SECTION -->
+        <section class="amac-pricing bg-white pt-10">
+            <div class="amac-wrap">
+                <div class="amac-hero" role="region" aria-label="Membership options">
+                    <h2>Join or Renew Today</h2>
+                    <p>Save up to <strong>25%</strong> with multi-year memberships. Every membership includes your spouse at <strong>no extra cost</strong>.</p>
+                    <div class="amac-badges" aria-label="Benefits badges">
+                        <span class="amac-badge"><span class="amac-dot" aria-hidden="true"></span>Spouse included</span>
+                        <span class="amac-badge">Auto-renew available</span>
+                        <span class="amac-badge">Cancel anytime</span>
+                    </div>
+                </div>
+
+                <div class="amac-grid" role="list">
+                    <!-- 1 Year -->
+                    <article class="amac-card theme-red" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">1 Year Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$17</span><span class="cents">.00</span><span class="per">/year</span>
+                            </div>
+                            <p class="amac-sub">With auto-renew</p>
+                            <span class="amac-pill">Fast & Easy</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Instant access to benefits</li>
+                            <li><span class="amac-check">✓</span>Great for trying AMAC</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join / Renew</a>
+                        </div>
+                    </article>
+
+                    <!-- 3 Year -->
+                    <article class="amac-card theme-purple" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">3 Year Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$44</span><span class="cents">.00</span><span class="per">/3 years</span>
+                            </div>
+                            <p class="amac-sub">With auto-renew</p>
+                            <span class="amac-pill">Save 13%</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Best balance of value</li>
+                            <li><span class="amac-check">✓</span>Locks in 3-year savings</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join / Renew</a>
+                        </div>
+                    </article>
+
+                    <!-- 5 Year -->
+                    <article class="amac-card theme-blue" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">5 Year Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$64</span><span class="cents">.00</span><span class="per">/5 years</span>
+                            </div>
+                            <p class="amac-sub">With auto-renew</p>
+                            <span class="amac-pill pop">Most Popular · Save 25%</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Best long-term value</li>
+                            <li><span class="amac-check">✓</span>Lowest yearly cost</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join / Renew</a>
+                        </div>
+                    </article>
+
+                    <!-- Lifetime -->
+                    <article class="amac-card theme-gold" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">Lifetime Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$250</span><span class="cents">&nbsp;</span><span class="per">one-time</span>
+                            </div>
+                            <p class="amac-sub">Honoring America’s 250th Anniversary</p>
+                            <span class="amac-pill">1 Payment</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Membership for life</li>
+                            <li><span class="amac-check">✓</span>Perfect gift option</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12 mt-10">
+        <div class="content-container text-center">
+            <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" alt="AMAC Logo" class="h-8 mx-auto mb-4 filter grayscale invert opacity-50">
+            <p class="opacity-75 text-sm">&copy; 2026 Association of Mature American Citizens. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Testimonial Data
+        const testimonials = [
+            { name: "Robert J.", date: "Jan 10, 2026", text: "RoseMark helped me understand my retirement options clearly. I feel much more secure now.", stars: 5 },
+            { name: "Linda S.", date: "Dec 15, 2025", text: "The team at RoseMark is professional and truly cares about the members. Highly recommended!", stars: 5 },
+            { name: "William T.", date: "Nov 22, 2025", text: "I've been a member for years and RoseMark has always provided top-notch financial advice.", stars: 5 },
+            { name: "Patricia M.", date: "Oct 05, 2025", text: "Finally found a financial advisor who listens to what I actually need. Five stars for service.", stars: 5 },
+            { name: "David K.", date: "Sep 18, 2025", text: "Great experience. The cashflow analysis they provided was eye-opening for my planning.", stars: 5 },
+            { name: "Susan B.", date: "Aug 30, 2025", text: "The spouse-included benefit is fantastic. We both feel looked after by AMAC and RoseMark.", stars: 5 }
+        ];
+
+        const track = document.getElementById('testimonialTrack');
+        const viewport = document.getElementById('sliderViewport');
+
+        function createCard(data) {
+            return `
+                <div class="testimonial-card bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500">${data.name[0]}</div>
+                        <div>
+                            <div class="font-bold text-gray-900">${data.name}</div>
+                            <div class="text-xs text-gray-400">${data.date}</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 italic">"${data.text}"</p>
+                    <div class="flex space-x-1 text-yellow-400">
+                        ${'★'.repeat(data.stars)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function initSlider() {
+            const content = testimonials.map(t => createCard(t)).join('');
+            track.innerHTML = content + content + content; // Triple clone for extra smoothness
+        }
+
+        function scrollSlider(direction) {
+            const scrollAmount = window.innerWidth < 768 ? 304 : 344; // Card width + margin
+            if (direction === 'left') {
+                viewport.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                viewport.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        initSlider();
+    </script>
+</body>
+</html>

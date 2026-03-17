@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patriot Mobile - AMAC Premium Wireless Benefit</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'amac-red': '#A00000',
+                        'amac-cta': '#CC0000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* JOIN SECTION STYLES */
+        :root {
+            --bg: #f6f8fc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --muted: #475569;
+            --stroke: rgba(2, 6, 23, .10);
+            --shadow: 0 18px 55px rgba(2, 6, 23, .10);
+            --red: #e11d48;
+            --purple: #7c3aed;
+            --blue: #2563eb;
+            --gold: #b45309;
+            --radius: 22px;
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .btn-glow {
+            box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.5);
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            box-shadow: 0 15px 30px -5px rgba(225, 29, 72, 0.6);
+            transform: translateY(-1px);
+        }
+
+        /* Prevent image selection/ghosting on drag */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-select: none;
+        }
+
+        /* Pricing Card Overrides for consistency */
+        .amac-pricing { font-family: ui-sans-serif, system-ui, sans-serif; color: var(--text); }
+        .amac-wrap { max-width: 1200px; margin: 0 auto; padding: 28px 24px 40px; }
+        .amac-hero {
+            background: radial-gradient(1000px 300px at 15% 0%, rgba(37,99,235,.18), transparent 55%),
+                        radial-gradient(900px 300px at 85% 0%, rgba(124,58,237,.16), transparent 55%),
+                        linear-gradient(180deg, #ffffff, var(--bg));
+            border: 1px solid var(--stroke);
+            border-radius: calc(var(--radius) + 6px);
+            padding: 26px 22px;
+            box-shadow: 0 8px 28px rgba(2, 6, 23, .06);
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+        .amac-hero h2 { margin: 0 0 8px; font-size: clamp(24px, 3.2vw, 40px); letter-spacing: -0.02em; line-height: 1.1; font-weight: 800; }
+        .amac-hero p { margin: 0 auto; color: var(--muted); font-size: 15px; line-height: 1.5; max-width: 70ch; }
+        .amac-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; justify-content: center; }
+        .amac-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(15, 23, 42, .05); border: 1px solid rgba(15, 23, 42, .08); color: rgba(15, 23, 42, .86); font-size: 13px; }
+        .amac-dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; box-shadow: 0 0 0 4px rgba(22,163,74,.12); animation: amac-breathe 2.2s ease-in-out infinite; }
+        @keyframes amac-breathe { 0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(22,163,74,.12); } 50% { transform: scale(1.25); box-shadow: 0 0 0 8px rgba(22,163,74,.18); } }
+        .amac-grid { margin-top: 20px; display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+        .amac-card { grid-column: span 12; background: var(--card); border: 1px solid var(--stroke); border-radius: var(--radius); padding: 18px 18px 16px; box-shadow: 0 10px 30px rgba(2, 6, 23, .06); position: relative; overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; display: flex; flex-direction: column; }
+        .amac-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .amac-top { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 14px; text-align: center; }
+        .amac-plan { font-weight: 800; letter-spacing: .02em; font-size: 13px; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .amac-pill { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--stroke); background: rgba(2, 6, 23, .03); color: rgba(2, 6, 23, .75); display: inline-flex; justify-content: center; align-items: center; margin: 0 auto; }
+        .amac-price { display: flex; align-items: flex-end; gap: 6px; margin: 8px 0 4px; }
+        .amac-price .amt { font-size: 44px; font-weight: 900; letter-spacing: -0.04em; line-height: 1; }
+        .amac-price .cents { font-size: 18px; font-weight: 800; padding-bottom: 6px; opacity: .9; }
+        .amac-price .per { font-size: 12px; color: var(--muted); padding-bottom: 10px; white-space: nowrap; }
+        .amac-sub { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+        .amac-features { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 10px; flex-grow: 1; }
+        .amac-features li { display: flex; gap: 10px; align-items: flex-start; color: rgba(15, 23, 42, .86); font-size: 14px; text-align: left; }
+        .amac-check { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; background: rgba(22,163,74,.14); color: #166534; flex: 0 0 18px; margin-top: 1px; }
+        .amac-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 800; letter-spacing: .01em; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--stroke); background: rgba(2, 6, 23, .02); color: rgba(2, 6, 23, .88); min-width: 140px; }
+        .amac-btn.primary { border: none; color: white; }
+        
+        .theme-red .amac-plan { color: var(--red); } 
+        .theme-red .amac-btn.primary { background: linear-gradient(135deg, #fb7185, var(--red)); box-shadow: 0 8px 20px -4px rgba(225, 29, 72, 0.4); }
+        .theme-purple .amac-plan { color: var(--purple); } 
+        .theme-purple .amac-btn.primary { background: linear-gradient(135deg, #a78bfa, var(--purple)); box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.4); }
+        .theme-blue .amac-plan { color: var(--blue); } 
+        .theme-blue .amac-btn.primary { background: linear-gradient(135deg, #60a5fa, var(--blue)); box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4); }
+        .theme-gold .amac-plan { color: var(--gold); } 
+        .theme-gold .amac-btn.primary { background: linear-gradient(135deg, #fbbf24, var(--gold)); box-shadow: 0 8px 20px -4px rgba(180, 83, 9, 0.4); }
+
+        @media (min-width: 680px) { .amac-card { grid-column: span 6; } }
+        @media (min-width: 1020px) { .amac-card { grid-column: span 3; } }
+
+        /* Testimonial Slider Styles */
+        .slider-viewport {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+        .slider-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 120s linear infinite;
+        }
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .testimonial-card {
+            width: 320px;
+            flex-shrink: 0;
+            margin: 0 12px;
+        }
+        
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e5e7eb;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+        .nav-btn:hover { background: white; scale: 1.1; box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+        .nav-left { left: -24px; }
+        .nav-right { right: -24px; }
+
+        @media (max-width: 1280px) {
+            .nav-left { left: 10px; }
+            .nav-right { right: 10px; }
+        }
+
+        @media (max-width: 768px) {
+            .testimonial-card { width: 280px; }
+            .nav-btn { display: none; }
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-white text-gray-800 antialiased overflow-x-hidden">
+
+    <!-- 1. HEADER -->
+    <header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+        <nav class="content-container flex items-center justify-between h-20">
+            <a href="https://amac.us">
+                <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" alt="AMAC Logo" class="h-10" draggable="false">
+            </a>
+            <div class="flex items-center space-x-6">
+                <a href="https://amac.us/login" class="hidden md:block text-gray-600 font-medium hover:text-amac-red">Login</a>
+                <a href="https://amac.us/secured/" class="bg-amac-red text-white font-bold py-2.5 px-6 rounded shadow-lg btn-glow hover:bg-red-700 transition">JOIN AMAC</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 2. HERO SECTION -->
+        <section class="bg-white">
+            <div class="content-container py-0 h-auto md:h-[250px] overflow-hidden flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 h-[200px] md:h-full relative overflow-hidden">
+                    <img src="https://dedicated.amac.us/dedicated/patriot-mobile-landing-page-image.jpg" alt="Patriot Mobile" class="w-full h-full object-contain" draggable="false">
+                </div>
+                <div class="w-full md:w-1/2 h-auto md:h-full flex items-center bg-white p-6 sm:p-8">
+                    <div>
+                        <h1 class="text-2xl font-extrabold text-amac-red leading-tight mb-2 uppercase tracking-tight">
+                            Patriot Mobile: Premium Wireless Service at a Discount
+                        </h1>
+                        <p class="text-base text-gray-700 mb-4">
+                            20% OFF for Life + 1st Month FREE + FREE 3-Year AMAC Membership
+                        </p>
+                        <a href="https://patriotmobile.com/partners/amac" class="inline-block bg-amac-cta text-white font-bold py-2.5 px-6 rounded-lg btn-glow hover:bg-red-700 transition text-sm">
+                            Switch Today
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="h-2 bg-amac-red border-0">
+
+        <!-- 3. BODY SECTION -->
+        <section class="py-10">
+            <div class="content-container">
+                <h2 class="text-3xl font-bold text-amac-red mb-6 border-l-4 border-amac-red pl-4 leading-tight">
+                    Premium Wireless Service at a Discount
+                </h2>
+                <div class="grid md:grid-cols-2 gap-10 text-gray-700 text-base leading-relaxed">
+                    <div>
+                        <p class="mb-4">
+                            <strong>Patriot Mobile</strong> is America’s ONLY Christian conservative wireless provider where faith, family, and freedom come first. For over 12 years, Patriot Mobile has proudly served Americans who want more than just a mobile phone plan.
+                        </p>
+                        <p class="mb-4">
+                            With premium coverage on all three major U.S. networks, your phone does more than keep you connected—Every dollar you spend helps fund causes that support our First and Second Amendment rights, the sanctity of life, and our veterans and first responders.
+                        </p>
+                        <p class="font-bold text-amac-red bg-red-50 p-4 rounded-xl border border-red-100">
+                            AMAC Members that switch to Patriot Mobile receive a lifetime 20% discount on all phone plans, a free month of service and an additional FREE 3 year AMAC membership.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Why Switch to Patriot Mobile:</h3>
+                        <ul class="space-y-4">
+                            <li class="flex gap-3">
+                                <span class="text-amac-red font-bold">✓</span>
+                                <div><strong>Premium coverage on ALL THREE networks</strong> – Clear calls and dependable nationwide service.</div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-amac-red font-bold">✓</span>
+                                <div><strong>Switching is easy</strong> – Keep your number and your phone. Activation takes minutes at home.</div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-amac-red font-bold">✓</span>
+                                <div><strong>100% U.S.-based support</strong> – Talk to real Americans who share your values.</div>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-amac-red font-bold">✓</span>
+                                <div><strong>Affordable plans</strong> – Flexible, unlimited talk, text, and data with no contracts.</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. VIDEO SECTION -->
+        <section class="py-10 bg-gray-50">
+            <div class="content-container">
+                <div class="max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <video class="w-full h-full aspect-video" controls poster="https://dedicated.amac.us/dedicated/patriot-mobile-landing-page-image.jpg" oncontextmenu="return false;" controlsList="nodownload">
+                        <source src="https://patriotmobile.com/wp-content/uploads/2025/11/commercial_service_new.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CALL TO ACTION -->
+        <section class="py-16 text-center">
+            <div class="content-container">
+                <p class="text-2xl text-amac-red font-bold mb-4">Turn your cellphone bill into a force for the values that matter most!</p>
+                <p class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">Call 833-332-2203</p>
+                <p class="text-xl font-semibold text-amac-red mb-10">Use promo code <span class="underline">AMAC</span> for a FREE month and 20% off for life!</p>
+                <div class="flex justify-center">
+                    <a href="https://patriotmobile.com/partners/amac" class="bg-amac-cta text-white font-bold py-4 px-12 rounded-2xl btn-glow hover:bg-red-700 transition text-xl">
+                        Switch Today
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. INFINITE TESTIMONIALS -->
+        <section class="bg-gray-100 py-16 overflow-hidden">
+            <div class="content-container mb-10 text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Member Success Stories</h2>
+                <p class="text-gray-600">See why AMAC members are switching to Patriot Mobile.</p>
+            </div>
+
+            <div class="content-container relative">
+                <button class="nav-btn nav-left" onclick="scrollSlider('left')" aria-label="Previous">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button class="nav-btn nav-right" onclick="scrollSlider('right')" aria-label="Next">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
+                <div class="slider-viewport group" id="sliderViewport">
+                    <div class="slider-track" id="testimonialTrack">
+                        <!-- JS Injection -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. MEMBERSHIP SECTION -->
+        <section class="amac-pricing bg-white pt-10">
+            <div class="amac-wrap">
+                <div class="amac-hero" role="region" aria-label="Membership options">
+                    <h2>Join or Renew Today</h2>
+                    <p>Save up to <strong>25%</strong> with multi-year memberships. Every membership includes your spouse at <strong>no extra cost</strong>.</p>
+                    <div class="amac-badges" aria-label="Benefits badges">
+                        <span class="amac-badge"><span class="amac-dot" aria-hidden="true"></span>Spouse included</span>
+                        <span class="amac-badge">Auto-renew available</span>
+                        <span class="amac-badge">Cancel anytime</span>
+                    </div>
+                </div>
+
+                <div class="amac-grid" role="list">
+                    <!-- 1 Year -->
+                    <article class="amac-card theme-red" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">1 Year Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$17</span><span class="cents">.00</span><span class="per">/year</span>
+                            </div>
+                            <p class="amac-sub">With auto-renew</p>
+                            <span class="amac-pill">Fast & Easy</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Instant access to benefits</li>
+                            <li><span class="amac-check">✓</span>Great for trying AMAC</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join / Renew</a>
+                        </div>
+                    </article>
+
+                    <!-- 3 Year -->
+                    <article class="amac-card theme-purple" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">3 Year Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$44</span><span class="cents">.00</span><span class="per">/3 years</span>
+                            </div>
+                            <p class="amac-sub">With auto-renew</p>
+                            <span class="amac-pill">Save 13%</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Best balance of value</li>
+                            <li><span class="amac-check">✓</span>Locks in 3-year savings</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join / Renew</a>
+                        </div>
+                    </article>
+
+                    <!-- 5 Year -->
+                    <article class="amac-card theme-blue" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">5 Year Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$64</span><span class="cents">.00</span><span class="per">/5 years</span>
+                            </div>
+                            <p class="amac-sub">With auto-renew</p>
+                            <span class="amac-pill pop">Most Popular · Save 25%</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Best long-term value</li>
+                            <li><span class="amac-check">✓</span>Lowest yearly cost</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join / Renew</a>
+                        </div>
+                    </article>
+
+                    <!-- Lifetime -->
+                    <article class="amac-card theme-gold" role="listitem">
+                        <div class="amac-top">
+                            <div class="amac-plan">Lifetime Membership</div>
+                            <div class="amac-price">
+                                <span class="amt">$250</span><span class="cents">&nbsp;</span><span class="per">one-time</span>
+                            </div>
+                            <p class="amac-sub">Honoring America’s 250th Anniversary</p>
+                            <span class="amac-pill">1 Payment</span>
+                        </div>
+                        <ul class="amac-features">
+                            <li><span class="amac-check">✓</span>Membership for life</li>
+                            <li><span class="amac-check">✓</span>Perfect gift option</li>
+                            <li><span class="amac-check">✓</span>Includes spouse for FREE</li>
+                        </ul>
+                        <div class="amac-actions">
+                            <a class="amac-btn primary" href="https://amac.us/secured/">Join</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12 mt-10">
+        <div class="content-container text-center">
+            <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" alt="AMAC Logo" class="h-8 mx-auto mb-4 filter grayscale invert opacity-50" draggable="false">
+            <p class="opacity-75 text-sm">&copy; 2026 Association of Mature American Citizens. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Media Protection: Disable right-click on all images and videos
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+                e.preventDefault();
+            }
+        }, false);
+
+        const testimonials = [
+            { name: "Caleb H.", date: "Feb 10, 2026", text: "Switching to Patriot Mobile was the easiest decision I've made. Great coverage and I love supporting a company that shares my values.", stars: 5 },
+            { name: "Sarah W.", date: "Jan 15, 2026", text: "The 20% lifetime discount as an AMAC member is real! My bill is lower and the U.S.-based support is fantastic.", stars: 5 },
+            { name: "Mark R.", date: "Dec 22, 2025", text: "Finally, a mobile provider that doesn't use my money to fund causes I disagree with. Signal is crystal clear.", stars: 5 },
+            { name: "Diane K.", date: "Nov 05, 2025", text: "I kept my old phone and my old number. Activation was done in 10 minutes from my kitchen table. Highly recommend!", stars: 5 },
+            { name: "Thomas B.", date: "Oct 18, 2025", text: "I travel a lot in my RV and the coverage on all three major networks ensures I'm always connected. No dropped calls!", stars: 5 },
+            { name: "Nancy G.", date: "Sep 30, 2025", text: "The free month of service was a nice bonus, but the 3-year AMAC membership extension was the icing on the cake!", stars: 5 }
+        ];
+
+        const track = document.getElementById('testimonialTrack');
+        const viewport = document.getElementById('sliderViewport');
+
+        function createCard(data) {
+            return `
+                <div class="testimonial-card bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center font-bold text-gray-500">${data.name[0]}</div>
+                        <div>
+                            <div class="font-bold text-gray-900">${data.name}</div>
+                            <div class="text-xs text-gray-400">${data.date}</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4 italic">"${data.text}"</p>
+                    <div class="flex space-x-1 text-yellow-400">
+                        ${'★'.repeat(data.stars)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function initSlider() {
+            const content = testimonials.map(t => createCard(t)).join('');
+            track.innerHTML = content + content + content;
+        }
+
+        function scrollSlider(direction) {
+            const scrollAmount = window.innerWidth < 768 ? 304 : 344;
+            if (direction === 'left') {
+                viewport.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                viewport.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+
+        initSlider();
+    </script>
+</body>
+</html>

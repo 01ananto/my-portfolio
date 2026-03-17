@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ananto Mohammad | Creative Portfolio</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+        body {
+            background-color: #0d0d0d;
+            margin: 0;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .play-button {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid white;
+            margin-left: 5px;
+        }
+
+        #root { width: 100%; min-height: 100vh; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in { animation: fadeIn 0.6s ease-out forwards; }
+
+        .modal-blur {
+            backdrop-filter: blur(12px);
+            background-color: rgba(0, 0, 0, 0.92);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useRef, useEffect, useCallback } = React;
+
+        const Icon = ({ name, size = 18, className = "" }) => {
+            useEffect(() => {
+                if (window.lucide) window.lucide.createIcons();
+            }, []);
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
+
+        const ProjectRow = ({ title, categoryKey, projects, onProjectClick }) => {
+            const scrollRef = useRef(null);
+
+            const scroll = (direction) => {
+                if (scrollRef.current) {
+                    const { scrollLeft, clientWidth } = scrollRef.current;
+                    const scrollTo = direction === 'left'
+                        ? scrollLeft - clientWidth * 0.8
+                        : scrollLeft + clientWidth * 0.8;
+
+                    scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+                }
+            };
+
+            return (
+                <div className="mb-10 group/row relative px-4 md:px-0 max-w-[1400px] mx-auto">
+                    <div className="flex items-center justify-between mb-4">
+                        <h2 className="text-sm font-bold text-white tracking-[0.2em] uppercase italic flex items-center gap-3">
+                            <span className="w-1 h-4 bg-amber-500 rounded-sm"></span>
+                            {title}
+                        </h2>
+
+                        <div className="flex gap-2 opacity-100 transition-opacity">
+                            <button
+                                onClick={() => scroll('left')}
+                                className="p-2 rounded-full bg-zinc-900 border border-white/10 hover:bg-amber-500 hover:text-black transition-all"
+                            >
+                                <Icon name="chevron-left" size={16} />
+                            </button>
+
+                            <button
+                                onClick={() => scroll('right')}
+                                className="p-2 rounded-full bg-zinc-900 border border-white/10 hover:bg-amber-500 hover:text-black transition-all"
+                            >
+                                <Icon name="chevron-right" size={16} />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div ref={scrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2">
+                        {projects.map((project, index) => (
+                            <div
+                                key={project.id}
+                                onClick={() => onProjectClick(categoryKey, index)}
+                                className="min-w-[340px] max-w-[340px] snap-start group cursor-pointer"
+                            >
+                                <div className="aspect-video relative overflow-hidden bg-black rounded-sm border border-white/5 group-hover:border-amber-500/50 transition-all duration-300">
+                                    <img
+                                        src={project.thumbnail}
+                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                                        alt={project.title}
+                                    />
+
+                                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                        {project.type === 'video' ? (
+                                            <div className="w-12 h-12 bg-black/45 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 opacity-100">
+                                                <div className="play-button"></div>
+                                            </div>
+                                        ) : (
+                                            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                                <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/20 transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                                                    <Icon name="external-link" className="text-white" size={20} />
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div className="mt-3 text-center">
+                                    <h3 className="text-[11px] font-medium text-zinc-400 group-hover:text-white transition-colors tracking-tight uppercase">
+                                        {project.title}
+                                    </h3>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const [showContactModal, setShowContactModal] = useState(false);
+            const [viewer, setViewer] = useState({ active: false, category: null, index: null });
+
+            const portfolioData = {
+                motion: {
+                    title: 'Motion Design',
+                    items: [
+                        { id: 101, title: 'Choosing a Dental Plan', thumbnail: 'https://img.youtube.com/vi/Vehb9cLXxNo/maxresdefault.jpg', type: 'video', videoId: 'Vehb9cLXxNo' },
+                        { id: 102, title: 'Affordable Dental Coverage', thumbnail: 'https://img.youtube.com/vi/hruffxWgEIA/maxresdefault.jpg', type: 'video', videoId: 'hruffxWgEIA' },
+                        { id: 108, title: 'Veterans Day', thumbnail: 'image-thumbnail/image-thumb-veteranday.jpg', type: 'video', videoId: '6od49groIZE' },
+                        { id: 109, title: 'Celebrating 15 Years of AMAC', thumbnail: 'image-thumbnail/image-thumb-15years.jpg', type: 'video', videoId: '_i3pubPtqYw' },
+                        { id: 110, title: 'Join AMAC', thumbnail: 'image-thumbnail/image-thumb-join-amac.jpg', type: 'video', videoId: 'bEnD86VgbF4' },
+                        { id: 111, title: 'Happy New Year Animation', thumbnail: 'image-thumbnail/image-thumb-happy-new-year.jpg', type: 'video', videoId: 'f3HODgZioaI' },
+                        { id: 112, title: 'Christmas Celebration Animation', thumbnail: 'image-thumbnail/image-thumb-cristmas.jpg', type: 'video', videoId: 'Y8m0BkeMp1U' },
+                        { id: 105, title: 'Give the Gift of AMAC', thumbnail: 'thumbnail/give-the-gift-of-amac.jpg', type: 'video', videoId: '6p0--WsPNnU' },
+                        { id: 106, title: 'Medicare Advantage or Supplement', thumbnail: 'https://img.youtube.com/vi/GoLTU99h4GE/maxresdefault.jpg', type: 'video', videoId: 'GoLTU99h4GE' },
+                        { id: 107, title: 'Understanding Medicare SOA', thumbnail: 'https://img.youtube.com/vi/WrwMH9mw71c/maxresdefault.jpg', type: 'video', videoId: 'WrwMH9mw71c' },
+                        { id: 113, title: 'Supplement Plan N Analysis', thumbnail: 'https://img.youtube.com/vi/lDXC2OAw0gI/maxresdefault.jpg', type: 'video', videoId: 'lDXC2OAw0gI' },
+                        { id: 114, title: 'Medicare Enrollment Navigation', thumbnail: 'https://img.youtube.com/vi/lN3AaOCPVaY/maxresdefault.jpg', type: 'video', videoId: 'lN3AaOCPVaY' }
+                    ]
+                },
+                video: {
+                    title: 'Video and Podcast',
+                    items: [
+                        { id: 201, title: 'Unmasking DEI: Dr. Carol Swain', thumbnail: 'https://img.youtube.com/vi/BESkd04Xty8/maxresdefault.jpg', type: 'video', videoId: 'BESkd04Xty8' },
+                        { id: 202, title: 'VA Stripped Veterans Rights', thumbnail: 'https://img.youtube.com/vi/38U9T-NIID8/maxresdefault.jpg', type: 'video', videoId: '38U9T-NIID8' },
+                        { id: 204, title: 'Todd Starnes Exclusive', thumbnail: 'https://img.youtube.com/vi/LhNT3TNoqrQ/maxresdefault.jpg', type: 'video', videoId: 'LhNT3TNoqrQ' },
+                        { id: 205, title: "Alzheimer's and the Brain", thumbnail: 'https://img.youtube.com/vi/mNVvoaReCwE/maxresdefault.jpg', type: 'video', videoId: 'mNVvoaReCwE' },
+                        { id: 206, title: "AMAC's Celebrate America! Alaska Cruise - Book Now!", thumbnail: 'image-thumbnail/image-thumb-america250.jpg', type: 'video', videoId: 'QFawM66C8gc' }
+                    ]
+                },
+                digiad: {
+                    title: 'Digital AD Design',
+                    items: [
+                        { id: 601, title: 'America 250 Quiz', thumbnail: 'https://i.ibb.co/TMfnVnSh/ad-250-start-quiz-mobile.jpg', type: 'graphic', subtitle: 'Mobile Ad' },
+                        { id: 602, title: 'America 250 Main', thumbnail: 'https://i.ibb.co/nq9tXqJ3/250-big-1860x680.jpg', type: 'graphic', subtitle: 'Big Banner' },
+                        { id: 603, title: 'Homepage Sidebar', thumbnail: 'https://i.ibb.co/mrfsYc5T/hompage-side-square-low-res.jpg', type: 'graphic', subtitle: 'Display Ad' },
+                        { id: 604, title: 'Join AMAC Campaign', thumbnail: 'https://i.ibb.co/dwwWMRCB/Join-AMAC-AD-1292x646.jpg', type: 'graphic', subtitle: 'Wide Banner' },
+                        { id: 605, title: 'Hero Section Design', thumbnail: 'https://i.ibb.co/Q3wTmM9f/Hero-Section-1.jpg', type: 'graphic', subtitle: 'Web Design' },
+                        { id: 606, title: 'Better for You Podcast', thumbnail: 'https://i.ibb.co/xtYWhwvc/Better-for-You-Podcast-Social-Media-V3.jpg', type: 'graphic', subtitle: 'Social Media Ad' },
+                        { id: 607, title: 'SFB Promotional', thumbnail: 'https://i.ibb.co/S4yJhG67/SFB-1040-X360-1.jpg', type: 'graphic', subtitle: 'Banner Ad' },
+                        { id: 608, title: 'Website Main Banner', thumbnail: 'https://i.ibb.co/W4R0gYW8/Website-Banner.jpg', type: 'graphic', subtitle: 'Digital Ad' },
+                        { id: 609, title: '100 Days with Trump', thumbnail: 'https://i.ibb.co/LzSQy177/100-Days-with-Trump-Quote.jpg', type: 'graphic', subtitle: 'Social Graphics' },
+                        { id: 610, title: 'EOY Donation Campaign', thumbnail: 'https://i.ibb.co/XfkGjrmF/AMAC-FOUNDATION-EOY-Donation-Campaign-1920x1080-V2.jpg', type: 'graphic', subtitle: 'Full Width' },
+                        { id: 611, title: 'EOY Donation Social', thumbnail: 'https://i.ibb.co/hFgSPJwz/AMAC-FOUNDATION-EOY-Donation-Campaign-1080x1080.jpg', type: 'graphic', subtitle: 'Square Ad' },
+                        { id: 612, title: 'AEP Countdown', thumbnail: 'https://i.ibb.co/xKGVXKrB/aep-one-day-left.jpg', type: 'graphic', subtitle: 'Urgent Promo' },
+                        { id: 613, title: 'Magazine Layout IV', thumbnail: 'https://i.ibb.co/YmYPRf4/Magazine-Layout-4.jpg', type: 'graphic', subtitle: 'Print to Digital' },
+                        { id: 614, title: 'Magazine Layout I', thumbnail: 'https://i.ibb.co/7d3jVfRY/Magazine-Layout-1-v2.jpg', type: 'graphic', subtitle: 'Digital Layout' },
+                        { id: 615, title: 'Magazine Layout Intro', thumbnail: 'https://i.ibb.co/gZQqtwGz/Magazine-Layout-0.jpg', type: 'graphic', subtitle: 'Design Preview' },
+                        { id: 616, title: 'Magazine Layout II', thumbnail: 'https://i.ibb.co/8nTrPmt6/Magazine-Layout-2-v2.jpg', type: 'graphic', subtitle: 'Featured Design' },
+                        { id: 617, title: 'Facebook Campaign', thumbnail: 'https://i.ibb.co/6JfMxPHr/Facebook-AD.jpg', type: 'graphic', subtitle: 'Paid Media' }
+                    ]
+                },
+                email: {
+                    title: 'Email Design',
+                    items: [
+                        { id: 701, title: 'Alaska Cruise Email', thumbnail: 'https://dedicated.amac.us/dedicated/header-0227-26.jpg', type: 'html-file', subtitle: 'Email Design', file: 'email-alaska-cruise.html' },
+                        { id: 702, title: 'Alaska Cruise Email 01', thumbnail: 'https://dedicated.amac.us/dedicated/alaska-email-banner-0121.png', type: 'html-file', subtitle: 'Email Design', file: 'email-alaska-cruise01.html' },
+                        { id: 703, title: 'Alaska Cruise Email 02', thumbnail: 'http://dedicated.amac.us/dedicated/alaksa-email-banner1028.gif', type: 'html-file', subtitle: 'Email Design', file: 'email-alaska-cruise02.html' },
+                        { id: 704, title: 'Alaska Cruise Email 03', thumbnail: 'https://dedicated.amac.us/dedicated/alaska-email-banner-0121.png', type: 'html-file', subtitle: 'Email Design', file: 'email-alaska-cruise-03.html' },
+                        { id: 705, title: 'AMAC Dental Email 01', thumbnail: 'http://dedicated.amac.us/dedicated/liberty-dental-email-1031-v3.jpg', type: 'html-file', subtitle: 'Email Design', file: 'email-amac-dental01.htm' },
+                        { id: 706, title: 'AMAC Dental Email 02', thumbnail: 'http://dedicated.amac.us/dedicated/liberty-dental-email-1031-v2.jpg', type: 'html-file', subtitle: 'Email Design', file: 'email-amac-dental02.htm' },
+                        { id: 707, title: 'Liberty Lane Email', thumbnail: 'http://dedicated.amac.us/dedicated/libertylaneroadside/liberty-lane-roadside-email-banner-v2.jpg', type: 'html-file', subtitle: 'Email Design', file: 'email-liberty-lane.html' },
+                        { id: 708, title: 'Rosemark Email', thumbnail: 'http://dedicated.amac.us/dedicated/rosemark-email-banner-122425.jpg', type: 'html-file', subtitle: 'Email Design', file: 'email-rosemark.html' }
+                    ]
+                },
+                landing: {
+                    title: 'Landing Page Design',
+                    items: [
+                        { id: 803, title: 'America 250 Landing Page', thumbnail: 'thumbnail/thumbnail-america250.jpg', type: 'html-file', subtitle: 'Landing Page', file: 'landing-america-250.html' },
+                        { id: 806, title: 'Rosemark Landing Page', thumbnail: 'thumbnail/thumbnail-landing-rosemark.jpg', type: 'html-file', subtitle: 'Landing Page', file: 'landing-rosemark.html' },
+                        { id: 801, title: 'Join Landing Page', thumbnail: 'thumbnail/thumbnail-join.jpg', type: 'html-file', subtitle: 'Landing Page', file: 'landing-join.html' },
+                        { id: 802, title: 'Sweepstakes Landing Page', thumbnail: 'thumbnail/thumbnail-sweepstakes.jpg', type: 'html-file', subtitle: 'Landing Page', file: 'landing-sweepstake.html' },
+                        { id: 804, title: 'Patriot Mobile Landing 01', thumbnail: 'thumbnail/thumbnail-landing-patriotmobile01.jpg', type: 'html-file', subtitle: 'Landing Page', file: 'landing-patriotmobile01.html' },
+                        { id: 805, title: 'Patriot Mobile Landing 02', thumbnail: 'thumbnail/thumbnail-landing-patriotmobile02.jpg', type: 'html-file', subtitle: 'Landing Page', file: 'landing-patriotmobile02.html' }
+                    ]
+                },
+                ad: {
+                    title: 'AD Design',
+                    items: [
+                        { id: 301, title: 'TIME Studios Production Ident', thumbnail: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800', type: 'graphic' },
+                        { id: 302, title: 'Samsung X Rihanna - Case Study', thumbnail: 'https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?auto=format&fit=crop&q=80&w=800', type: 'graphic' }
+                    ]
+                },
+                ai: {
+                    title: 'Ai AD Design',
+                    items: [
+                        { id: 401, title: 'Future Cities Generative', thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800', type: 'graphic' },
+                        { id: 402, title: 'Neural Landscapes Series', thumbnail: 'https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&q=80&w=800', type: 'graphic' }
+                    ]
+                },
+                thumb: {
+                    title: 'Thumbnail Design',
+                    items: [
+                        { id: 1001, title: 'Thumbnail 01', thumbnail: 'image-thumbnail/image-thumb (1).jpg', type: 'graphic', subtitle: 'Thumbnail Design' },
+                        { id: 1002, title: 'Thumbnail 02', thumbnail: 'image-thumbnail/image-thumb (2).jpg', type: 'graphic', subtitle: 'Thumbnail Design' },
+                        { id: 1003, title: 'Thumbnail 03', thumbnail: 'image-thumbnail/image-thumb (3).jpg', type: 'graphic', subtitle: 'Thumbnail Design' },
+                        { id: 1004, title: 'Thumbnail 04', thumbnail: 'image-thumbnail/image-thumb (4).jpg', type: 'graphic', subtitle: 'Thumbnail Design' },
+                        { id: 1005, title: 'Thumbnail 05', thumbnail: 'image-thumbnail/image-thumb (5).jpg', type: 'graphic', subtitle: 'Thumbnail Design' },
+                        { id: 1006, title: 'Thumbnail 06', thumbnail: 'image-thumbnail/image-thumb (6).jpg', type: 'graphic', subtitle: 'Thumbnail Design' }
+                    ]
+                }
+            };
+
+            const personalInfo = {
+                name: 'Ananto Mohammad',
+                email: 'anantomohammad@gmail.com',
+                phone: '+1 929 321 4400',
+                location: 'New York, NY',
+                bio: 'Graphic Designer • HTML Email Developer • Landing Page Designer',
+                resumeLink: 'https://docs.google.com/document/d/1G_xAu_pW1AZFsBj2-_AKTH6h5WBMJJTz/export?format=pdf'
+            };
+
+            const openViewer = (category, index) => {
+                setViewer({ active: true, category, index });
+            };
+
+            const closeViewer = () => {
+                setViewer({ active: false, category: null, index: null });
+            };
+
+            const navigateViewer = useCallback((direction) => {
+                if (!viewer.active) return;
+                const items = portfolioData[viewer.category].items;
+                let newIndex = viewer.index + direction;
+                if (newIndex < 0) newIndex = items.length - 1;
+                if (newIndex >= items.length) newIndex = 0;
+                setViewer(prev => ({ ...prev, index: newIndex }));
+            }, [viewer]);
+
+            const activeProject = viewer.active ? portfolioData[viewer.category].items[viewer.index] : null;
+
+            return (
+                <div className="min-h-screen pb-24">
+                    <header className="py-20 text-center animate-fade-in">
+                        <div className="max-w-6xl mx-auto px-6">
+                            <h1 className="text-4xl md:text-5xl font-black text-white border-4 border-amber-500 px-10 py-4 inline-block uppercase italic mb-6 cursor-default hover:bg-amber-500 hover:text-black transition-all">
+                                {personalInfo.name}
+                            </h1>
+
+                            <p className="text-[11px] text-zinc-500 uppercase tracking-[0.7em] font-bold mb-10">
+                                {personalInfo.bio}
+                            </p>
+
+                            <div className="flex flex-wrap justify-center gap-4">
+                                <a
+                                    href={personalInfo.resumeLink}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 px-8 py-3.5 rounded-full border border-white/10 hover:bg-white/5 transition-all text-xs font-bold uppercase tracking-widest"
+                                >
+                                    <Icon name="download" size={14} /> Resume
+                                </a>
+
+                                <button
+                                    onClick={() => setShowContactModal(true)}
+                                    className="flex items-center gap-2 px-10 py-3.5 rounded-full bg-amber-500 text-black font-black uppercase text-xs tracking-[0.2em] hover:bg-amber-400 transition-all shadow-xl shadow-amber-500/20"
+                                >
+                                    <Icon name="mail" size={14} /> Contact
+                                </button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-[1500px] mx-auto">
+                        {Object.entries(portfolioData).map(([key, data]) => (
+                            <ProjectRow
+                                key={key}
+                                title={data.title}
+                                categoryKey={key}
+                                projects={data.items}
+                                onProjectClick={openViewer}
+                            />
+                        ))}
+                    </main>
+
+                    {viewer.active && activeProject && (
+                        <div
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 modal-blur animate-fade-in"
+                            onClick={closeViewer}
+                        >
+                            <button
+                                onClick={(e) => { e.stopPropagation(); navigateViewer(-1); }}
+                                className="absolute left-4 md:left-10 z-[60] p-4 text-white/40 hover:text-amber-500 transition-all"
+                            >
+                                <Icon name="chevron-left" size={48} />
+                            </button>
+
+                            <div
+                                className="relative w-full max-w-6xl flex flex-col items-center"
+                                onClick={e => e.stopPropagation()}
+                            >
+                                <button
+                                    onClick={closeViewer}
+                                    className="absolute -top-12 right-0 text-white/60 hover:text-white font-bold uppercase text-[10px] tracking-widest flex items-center gap-2 transition-colors"
+                                >
+                                    CLOSE <Icon name="x" size={20} />
+                                </button>
+
+                                {activeProject.type === 'video' ? (
+                                    <div className="w-full video-container">
+                                        <iframe
+                                            src={`https://www.youtube-nocookie.com/embed/${activeProject.videoId}?autoplay=1&mute=1&controls=1&modestbranding=1&rel=0&playsinline=1&iv_load_policy=3`}
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                            referrerPolicy="strict-origin-when-cross-origin"
+                                            allowFullScreen
+                                        ></iframe>
+                                    </div>
+                                ) : activeProject.type === 'html-file' ? (
+                                    <div className="w-full h-[85vh] bg-white rounded-xl overflow-hidden shadow-2xl flex flex-col">
+                                        <div className="bg-zinc-900 px-6 py-3 flex justify-between items-center shrink-0">
+                                            <h3 className="text-white text-[11px] font-black uppercase tracking-widest italic">
+                                                {activeProject.title}
+                                            </h3>
+
+                                            <a
+                                                href={encodeURI(activeProject.file)}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-[10px] px-3 py-2 rounded-full border border-white/10 text-white uppercase tracking-widest hover:bg-white/10 transition-all"
+                                            >
+                                                Open Full
+                                            </a>
+                                        </div>
+
+                                        <iframe
+                                            className="w-full grow border-none"
+                                            src={encodeURI(activeProject.file)}
+                                            title={activeProject.title}
+                                        ></iframe>
+                                    </div>
+                                ) : (
+                                    <div className="max-w-4xl max-h-[80vh] rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-zinc-900 flex flex-col items-center">
+                                        <img
+                                            src={activeProject.thumbnail}
+                                            className="max-w-full max-h-[70vh] object-contain"
+                                            alt={activeProject.title}
+                                        />
+
+                                        <div className="p-6 text-center">
+                                            <h3 className="text-xl font-bold text-white uppercase italic tracking-tighter">
+                                                {activeProject.title}
+                                            </h3>
+                                            <p className="text-zinc-500 text-xs uppercase tracking-widest mt-1 font-bold">
+                                                {activeProject.subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <button
+                                onClick={(e) => { e.stopPropagation(); navigateViewer(1); }}
+                                className="absolute right-4 md:right-10 z-[60] p-4 text-white/40 hover:text-amber-500 transition-all"
+                            >
+                                <Icon name="chevron-right" size={48} />
+                            </button>
+                        </div>
+                    )}
+
+                    {showContactModal && (
+                        <div
+                            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-fade-in"
+                            onClick={() => setShowContactModal(false)}
+                        >
+                            <div
+                                className="relative bg-[#0d0d0d] border border-white/10 p-10 max-w-md w-full shadow-2xl"
+                                onClick={e => e.stopPropagation()}
+                            >
+                                <button
+                                    onClick={() => setShowContactModal(false)}
+                                    className="absolute top-6 right-6 text-zinc-500 hover:text-white transition-colors"
+                                >
+                                    <Icon name="x" />
+                                </button>
+
+                                <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter mb-8 border-b-2 border-amber-500 inline-block pb-1">
+                                    Contact
+                                </h2>
+
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center text-amber-500">
+                                            <Icon name="mail" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] text-zinc-500 uppercase font-black">Email</p>
+                                            <a href={`mailto:${personalInfo.email}`} className="text-white text-lg">
+                                                {personalInfo.email}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center text-amber-500">
+                                            <Icon name="phone" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] text-zinc-500 uppercase font-black">Phone</p>
+                                            <a href={`tel:${personalInfo.phone}`} className="text-white text-lg">
+                                                {personalInfo.phone}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-10 h-10 bg-zinc-900 rounded-lg flex items-center justify-center text-amber-500">
+                                            <Icon name="map-pin" />
+                                        </div>
+                                        <div>
+                                            <p className="text-[10px] text-zinc-500 uppercase font-black">Location</p>
+                                            <p className="text-white text-lg">{personalInfo.location}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <footer className="mt-20 text-center border-t border-white/5 py-10 opacity-30">
+                        <p className="text-[10px] font-bold uppercase tracking-[0.5em]">
+                            © 2025 - {personalInfo.name} Media
+                        </p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

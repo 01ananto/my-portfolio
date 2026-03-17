@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMAC | Freedom to Travel Sweepstakes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .serif { font-family: 'Playfair Display', serif; }
+        .script-font { font-family: 'Lobster', cursive; }
+        
+        /* Brand Colors */
+        .bg-amac-nav-blue { background-color: #005696; }
+        .bg-amac-nav-red { background-color: #e31b23; }
+        .text-amac-blue { color: #1b365d; }
+        
+        /* Navigation Button Styles */
+        .nav-btn { transition: all 0.2s ease-in-out; }
+        .nav-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* Sub-Header Star Pattern Background */
+        .sub-header-bg {
+            background-color: #f1f7fd;
+            background-image: radial-gradient(#d1e1f5 2px, transparent 2px);
+            background-size: 40px 40px;
+            position: relative;
+        }
+
+        /* Footer Specifics */
+        .footer-bg { background-color: #0c0c0c; }
+        .footer-input { background-color: #1a1a1a; border-color: #333; }
+        .footer-btn { background-color: #3ca9e2; }
+
+        /* Hero Styling */
+        .hero-box {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Gift Card Professional Styling with Restored Bouncy Wiggle */
+        .gift-card {
+            aspect-ratio: 1.58 / 1;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            /* Transition remains for smooth color changes if any, but movement logic is scoped below */
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* RESTRICT WIGGLE TO DESKTOP ONLY */
+        @media (min-width: 768px) {
+            .gift-card:hover { 
+                transform: translateY(-15px) rotate(2deg); 
+                box-shadow: 0 30px 60px -12px rgba(0,0,0,0.4);
+            }
+        }
+        
+        .card-gold { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+        .card-silver { background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%); }
+        .card-bronze { background: linear-gradient(135deg, #e67e22 0%, #d35400 100%); }
+
+        .ribbon {
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: #e31b23;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Hide scrollbar for clean horizontal scroll on mobile */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #005696; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 overflow-x-hidden">
+
+    <!-- Header / Navigation (Matches image_c90201.png) -->
+    <header class="bg-white border-b border-slate-100 shadow-sm sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-4 lg:px-6">
+            <div class="flex justify-between items-center h-20">
+                <!-- Main Logo -->
+                <div class="flex-shrink-0">
+                    <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" 
+                         alt="AMAC Logo" 
+                         class="h-10 md:h-11 w-auto">
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="#" class="nav-btn bg-amac-nav-blue text-white px-5 py-2 rounded-lg flex items-center gap-2 font-medium text-[15px]">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                        Login
+                    </a>
+                    <a href="#" class="nav-btn bg-amac-nav-blue text-white px-6 py-2 rounded-lg font-medium text-[15px]">Newsline</a>
+                    <a href="#" class="nav-btn bg-amac-nav-blue text-white px-6 py-2 rounded-lg font-medium text-[15px]">Benefits</a>
+                    <a href="#" class="nav-btn bg-amac-nav-red text-white px-6 py-2 rounded-lg font-medium text-[15px] ml-4">Join AMAC</a>
+                    <button class="nav-btn bg-amac-nav-red text-white px-5 py-2 rounded-lg flex items-center gap-2 font-medium text-[15px]">
+                        More <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                </div>
+
+                <button class="lg:hidden p-2 text-slate-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sub-Header with Updated Logo -->
+    <div class="sub-header-bg py-4 lg:py-6 border-b border-slate-200 overflow-hidden">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+            <img src="https://dedicated.amac.us/dedicated/amac-sweepstakes-logo-concept.png" 
+                 alt="AMAC Sweepstakes" 
+                 class="h-14 md:h-20 lg:h-24 mx-auto mb-2 drop-shadow-sm">
+            <h2 class="text-amac-nav-blue font-bold text-sm md:text-base lg:text-lg uppercase tracking-wider">
+                Enter Every Day to Increase Your Chances of Winning!
+            </h2>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] min-h-[600px] flex items-start pt-6 md:pt-8 overflow-hidden">
+        <!-- Background Image Desktop -->
+        <img src="https://dedicated.amac.us/dedicated/sweepstakes-tripwise-landing-page-V3.jpg" 
+             alt="Sun, Sand and Sweepstakes Background" 
+             class="hidden md:block absolute inset-0 w-full h-full object-cover">
+             
+        <!-- Background Image Mobile -->
+        <img src="https://dedicated.amac.us/dedicated/sweepstakes-tripwise-landing-page-mobile.jpg" 
+             alt="Sun, Sand and Sweepstakes Background Mobile" 
+             class="block md:hidden absolute inset-0 w-full h-full object-cover">
+        
+        <div class="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-center md:justify-end">
+            <!-- Horizontal Hero Box - Centered on mobile, Right-aligned on desktop -->
+            <div class="max-w-4xl hero-box p-8 md:p-10 rounded-[3rem] text-center md:text-right">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-16">
+                    
+                    <!-- Left Side (Mobile Bottom): Dates, Prizes & Button -->
+                    <div class="flex flex-col items-center md:items-start md:border-r border-slate-300 md:pr-16 order-2 md:order-1 text-center md:text-left">
+                        <div class="mb-8">
+                            <p class="text-sm text-slate-700 font-bold uppercase tracking-widest mb-1">Ends March 31, 2026</p>
+                            <p class="text-2xl text-amac-nav-red font-black">Win Up To $1,000</p>
+                        </div>
+                        <div class="flex justify-center md:justify-start w-full">
+                            <a href="#entry-section" class="bg-amac-nav-red text-white px-12 py-4 rounded-xl text-xl font-black hover:scale-105 transition-all shadow-xl shadow-red-500/40 uppercase tracking-widest whitespace-nowrap">
+                                Enter Now
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Right Side (Mobile Top): Title & Tagline -->
+                    <div class="text-center md:text-right order-1 md:order-2">
+                        <h1 class="script-font text-5xl md:text-7xl mb-2 text-[#005696] leading-tight">
+                            Sun, Sand and <br>Sweepstakes
+                        </h1>
+                        <p class="text-amac-nav-blue font-black text-lg md:text-xl uppercase tracking-[0.2em]">
+                            Freedom to Travel
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        <!-- Wave Transition -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[80px]" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V0C0,0,10,39.3,55.12,62.13,100,84.88,168.42,85,235.38,74.18Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Sponsor Section (TripWise Logo) -->
+    <section class="py-20 bg-slate-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-amac-nav-blue font-black uppercase tracking-widest text-xs mb-10">Brought To You By Our Sponsor</p>
+            <div class="flex flex-col items-center">
+                <img src="https://dedicated.amac.us/dedicated/tripwise-logo.png" 
+                     alt="TripWise" 
+                     class="h-16 md:h-20 mb-10 w-auto">
+                <p class="text-slate-600 text-xl md:text-3xl leading-relaxed max-w-4xl mx-auto serif italic">
+                    Creators of the <span class="font-bold text-[#005696] not-italic">TripWise Travel Protection Plan</span> — helping protect the trips that matter most.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prize Section -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <h2 class="serif text-4xl md:text-5xl font-bold text-slate-800">Win A Dream Getaway</h2>
+                <div class="w-24 h-1.5 bg-amac-nav-red mx-auto mt-6 rounded-full"></div>
+            </div>
+            
+            <!-- Mobile Horizontal Scroll / Desktop Grid -->
+            <div id="prize-scroll-container" class="flex overflow-x-auto pt-10 pb-12 gap-6 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:gap-12 lg:gap-16 max-w-6xl mx-auto md:pb-16">
+                <!-- Grand Prize Card -->
+                <div class="flex flex-col items-center group flex-shrink-0 w-[85vw] md:w-full snap-center">
+                    <div class="gift-card card-gold w-full">
+                        <div class="ribbon">Exclusive</div>
+                        <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" class="h-6 mb-8 filter brightness-0 opacity-20">
+                        <div class="text-white text-sm font-black uppercase tracking-[0.2em] mb-2 text-center">Expedia Voucher</div>
+                        <div class="text-white text-7xl font-black serif tracking-tighter">$1,000</div>
+                        <div class="mt-8 text-white/80 text-[10px] font-bold uppercase tracking-widest">Grand Prize</div>
+                    </div>
+                </div>
+
+                <!-- Second Prize Card -->
+                <div class="flex flex-col items-center group flex-shrink-0 w-[85vw] md:w-full snap-center">
+                    <div class="gift-card card-silver w-full">
+                        <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" class="h-6 mb-8 filter brightness-0 invert opacity-20">
+                        <div class="text-white text-sm font-black uppercase tracking-[0.2em] mb-2 text-center">Expedia Voucher</div>
+                        <div class="text-white text-7xl font-black serif tracking-tighter">$500</div>
+                        <div class="mt-8 text-white/80 text-[10px] font-bold uppercase tracking-widest">Second Prize</div>
+                    </div>
+                </div>
+
+                <!-- Third Prize Card -->
+                <div class="flex flex-col items-center group flex-shrink-0 w-[85vw] md:w-full snap-center">
+                    <div class="gift-card card-bronze w-full">
+                        <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" class="h-6 mb-8 filter brightness-0 invert opacity-20">
+                        <div class="text-white text-sm font-black uppercase tracking-[0.2em] mb-2 text-center">Expedia Voucher</div>
+                        <div class="text-white text-7xl font-black serif tracking-tighter">$250</div>
+                        <div class="mt-8 text-white/80 text-[10px] font-bold uppercase tracking-widest">Third Prize</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Visual Scroll Indicator for Mobile -->
+            <div id="prize-dots" class="flex justify-center gap-2 mt-4 md:hidden">
+                <div class="w-2.5 h-2.5 rounded-full transition-all cursor-pointer bg-amac-nav-blue" data-index="0"></div>
+                <div class="w-2.5 h-2.5 rounded-full transition-all cursor-pointer bg-slate-200" data-index="1"></div>
+                <div class="w-2.5 h-2.5 rounded-full transition-all cursor-pointer bg-slate-200" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Entry Section (Aptivada Integrated) -->
+    <section id="entry-section" class="py-24 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-100">
+                <div class="bg-amac-nav-blue p-12 text-center text-white">
+                    <h2 class="serif text-4xl md:text-5xl mb-6 italic">Ready to plan your next adventure?</h2>
+                    <p class="text-lg opacity-90 max-w-2xl mx-auto">
+                        Whether you’re dreaming of a relaxing beach escape or exploring somewhere new, enter now for your chance to win!
+                    </p>
+                </div>
+                
+                <div class="p-8 md:p-16">
+                    <div class="flex flex-col lg:flex-row gap-16">
+                        <!-- Instructions -->
+                        <div class="lg:w-1/3 space-y-8">
+                            <div>
+                                <h4 class="text-amac-nav-blue font-black uppercase tracking-widest text-xs mb-4">How To Enter</h4>
+                                <ul class="space-y-4 text-sm font-medium text-slate-600">
+                                    <li class="flex gap-3"><span class="w-2 h-2 rounded-full bg-amac-nav-red mt-1.5 flex-shrink-0"></span> Enter using your email address.</li>
+                                    <li class="flex gap-3"><span class="w-2 h-2 rounded-full bg-amac-nav-red mt-1.5 flex-shrink-0"></span> Each member can enter once per day.</li>
+                                    <li class="flex gap-3"><span class="w-2 h-2 rounded-full bg-amac-nav-red mt-1.5 flex-shrink-0"></span> Bonus entries can be earned inside the widget!</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Audience Widget -->
+                        <div class="lg:w-2/3 w-full min-h-[500px]">
+                            <div class="aptivada-campaign"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-bg text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 mb-16">
+            <h3 class="serif text-2xl font-bold mb-6 italic">Stay Informed! Subscribe To Our Daily Newsletter.</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input type="text" placeholder="*First Name" class="footer-input px-4 py-3 rounded text-slate-300 outline-none">
+                <input type="text" placeholder="*Last Name" class="footer-input px-4 py-3 rounded text-slate-300 outline-none">
+                <input type="email" placeholder="*Email Address" class="footer-input px-4 py-3 rounded text-slate-300 outline-none">
+                <button class="footer-btn text-white font-bold py-3 rounded hover:brightness-110 uppercase tracking-widest text-xs">Subscribe Now</button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-5 gap-8 mb-16 border-b border-white/5 pb-16">
+            <div><h4 class="font-bold mb-6">Join</h4><ul class="space-y-3 text-slate-400 text-sm"><li>Login</li><li>AMAC Action</li><li>AMAC Foundation</li><li>AMAC Store</li></ul></div>
+            <div><h4 class="font-bold mb-6">Stay Connected</h4><ul class="space-y-3 text-slate-400 text-sm"><li>Newsline</li><li>Podcast</li><li>Newsletters</li><li>Sweepstakes</li></ul></div>
+            <div><h4 class="font-bold mb-6">Better For You</h4><ul class="space-y-3 text-slate-400 text-sm"><li>Medicare</li><li>Social Security</li><li>AMAC Active</li></ul></div>
+            <div><h4 class="font-bold mb-6">Better For America</h4><ul class="space-y-3 text-slate-400 text-sm"><li>Our Stances</li><li>Annual Report</li><li>Get Involved</li></ul></div>
+            <div><h4 class="font-bold mb-6">About Us</h4><ul class="space-y-3 text-slate-400 text-sm"><li>Mission</li><li>Our Team</li><li>Contact Us</li></ul></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center mb-8">
+            <img src="https://static-asset.amac.us/wp-content/uploads/2025/04/17184129/amac_logo.svg" alt="AMAC" class="h-8 filter brightness-200 mb-6 md:mb-0">
+            <div class="flex items-center gap-4">
+                <span class="text-slate-500 text-sm font-medium">Follow Us</span>
+                <div class="flex gap-2">
+                    <a href="#" class="w-9 h-9 bg-[#1a1a1a] flex items-center justify-center rounded text-slate-300">FB</a>
+                    <a href="#" class="w-9 h-9 bg-[#1a1a1a] flex items-center justify-center rounded text-slate-300">X</a>
+                    <a href="#" class="w-9 h-9 bg-[#1a1a1a] flex items-center justify-center rounded text-slate-300">YT</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 text-[12px] text-slate-500 text-center font-light opacity-60">
+            © 2026 AMAC, Inc. All Rights Reserved. Terms of Use | Privacy Policy<br><br>
+            The Association of Mature American Citizens (AMAC) is here to protect your interests and offer an alternative perspective on senior problems.
+        </div>
+    </footer>
+
+    <!-- Scripts Section -->
+    <script>
+        // Aptivada Script Handling
+        window.AptivadaAsyncInit = function(){
+            if (window.Aptivada && typeof window.Aptivada.init === 'function') {
+                window.Aptivada.init({
+                    campaignId: 1860785,
+                    campaignType: "contest"
+                });
+            }
+        };
+
+        // Mobile Smooth Auto-Scroll and Dot Navigation Logic for Gift Cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.getElementById('prize-scroll-container');
+            const dots = document.querySelectorAll('#prize-dots div');
+            let isUserInteracting = false;
+            let autoScrollInterval;
+
+            // Sync dots with scroll position
+            const updateDots = () => {
+                // Calculate based on the width of a single card child + gap
+                const firstCard = scrollContainer.children[0];
+                if (!firstCard) return;
+                
+                const cardWidth = firstCard.offsetWidth;
+                const gap = 24; // Equivalent to Tailwind's gap-6
+                const scrollLeft = scrollContainer.scrollLeft;
+                
+                // Determine current index based on center of view
+                const index = Math.round(scrollLeft / (cardWidth + gap));
+                
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('bg-amac-nav-blue', i === index);
+                    dot.classList.toggle('bg-slate-200', i !== index);
+                });
+            };
+
+            // Scroll to specific slide when dot is clicked
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    isUserInteracting = true;
+                    clearInterval(autoScrollInterval);
+                    
+                    const firstCard = scrollContainer.children[0];
+                    const cardWidth = firstCard.offsetWidth;
+                    const gap = 24;
+                    
+                    scrollContainer.scrollTo({
+                        left: index * (cardWidth + gap),
+                        behavior: 'smooth'
+                    });
+                    
+                    // Resume auto-scroll after a longer delay if clicked
+                    setTimeout(() => {
+                        isUserInteracting = false;
+                        startAutoScroll();
+                    }, 8000);
+                });
+            });
+
+            const startAutoScroll = () => {
+                if (window.innerWidth >= 768) return; // Only auto-scroll on mobile
+                
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = setInterval(() => {
+                    if (isUserInteracting) return;
+                    
+                    const firstCard = scrollContainer.children[0];
+                    const cardWidth = firstCard.offsetWidth;
+                    const gap = 24;
+                    const maxScroll = scrollContainer.scrollWidth - scrollContainer.offsetWidth;
+                    
+                    if (scrollContainer.scrollLeft >= maxScroll - 10) {
+                        scrollContainer.scrollTo({ left: 0, behavior: 'smooth' });
+                    } else {
+                        scrollContainer.scrollBy({ left: cardWidth + gap, behavior: 'smooth' });
+                    }
+                }, 4000); // Cycle every 4 seconds
+            };
+
+            // Event Listeners for Touch/Scroll Interaction
+            scrollContainer.addEventListener('scroll', updateDots);
+            
+            scrollContainer.addEventListener('touchstart', () => { 
+                isUserInteracting = true;
+                clearInterval(autoScrollInterval);
+            });
+            
+            scrollContainer.addEventListener('touchend', () => {
+                // Set a timeout to resume auto-scroll after user stops touching
+                setTimeout(() => {
+                    isUserInteracting = false;
+                    startAutoScroll();
+                }, 5000);
+            });
+
+            // Initial start
+            startAutoScroll();
+
+            // Generic Smooth Scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    const target = document.querySelector(href);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+    <script async src="https://xp.audience.io/sdk-legacy.js"></script>
+</body>
+</html>
